@@ -1,0 +1,33 @@
+body {
+  background-color: skyblue;
+}
+
+h1 {
+  margin-left: 2%;
+}
+
+img {
+  border-radius: 20px;
+  margin-right: 20px;
+}
+
+.tvShow {
+  width: 45%;
+  border: white dashed 2px;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  margin: 20px 2%;
+}
+
+.shows {
+  display: flex;
+  flex-direction: column;
+}
+
+.showRow {
+  display: flex;
+  flex-direction: row;
+}
+
+/*# sourceMappingURL=index.css.map */
