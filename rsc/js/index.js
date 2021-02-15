@@ -1,37 +1,3 @@
-const FILLER = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-
-const MANDALORIAN = {
-    name:"The Mandalorian",
-    rating:8,
-    genre:"Space Western",
-    summary:FILLER,
-    img:"rsc/img/theMandalorianIcon.jpg"
-}
-
-const HIS_DARK_MATERIALS = {
-    name:"His Dark Materials",
-    rating:9,
-    genre:"Fantasy Drama",
-    summary:FILLER,
-    img:"rsc/img/hisDarkMaterialsIcon.jpg"
-}
-
-const CARNIVAL_ROW = {
-    name:"Carnival Row",
-    rating:3,
-    genre:"Steampunk",
-    summary:FILLER,
-    img:"rsc/img/carnivalRowIcon.jpg"
-}
-
-const ALEX_RIDER = {
-    name:"Alex Rider",
-    rating:6,
-    genre:"Spy Thriller",
-    summary:FILLER,
-    img:"rsc/img/alexRiderIcon.jpg"
-}
-
 const SHOWS_LIST = document.querySelector(".shows")
 
 function addShowToHTML(show) {
@@ -64,7 +30,12 @@ function addTextSection(regionToAddTo, name, content) {
     regionToAddTo.appendChild(newTextElement)
 }
 
-addShowToHTML(MANDALORIAN)
-addShowToHTML(HIS_DARK_MATERIALS)
-addShowToHTML(CARNIVAL_ROW)
-addShowToHTML(ALEX_RIDER)
+let request = new XMLHttpRequest()
+request.open("GET", "rsc/shows.json", false)
+request.send(null)
+const SHOW_DATA = JSON.parse(request.responseText)
+
+for (let i = 0; i < SHOW_DATA["shows"].length; i++) {
+    addShowToHTML(SHOW_DATA["shows"][i])
+}
+
