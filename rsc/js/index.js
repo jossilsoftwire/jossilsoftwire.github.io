@@ -54,10 +54,15 @@ for (let i = 0; i < SHOW_DATA["shows"].length; i++) {
     addShowToHTML(SHOW_DATA["shows"][i])
 }
 
-for (let i = 0; i < localStorage.length; i++) {
-    if (localStorage.key(i).startsWith("show")) {
-        const SHOW_STRING = localStorage.getItem(localStorage.key(i))
-        const SHOW_JSON = JSON.parse(SHOW_STRING)
-        addShowToHTML(SHOW_JSON)
+if (localStorage.length === 0) {
+    document.querySelector("#clearButton").classList.add("hidden")
+} else {
+
+    for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).startsWith("show")) {
+            const SHOW_STRING = localStorage.getItem(localStorage.key(i))
+            const SHOW_JSON = JSON.parse(SHOW_STRING)
+            addShowToHTML(SHOW_JSON)
+        }
     }
 }

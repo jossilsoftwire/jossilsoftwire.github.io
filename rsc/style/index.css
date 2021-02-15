@@ -41,4 +41,8 @@ button:hover {
   flex-flow: row wrap;
 }
 
+.hidden {
+  display: none;
+}
+
 /*# sourceMappingURL=index.css.map */
