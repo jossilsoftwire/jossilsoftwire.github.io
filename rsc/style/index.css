@@ -20,8 +20,8 @@ button {
   padding: 10px 24px;
   transition-duration: 0.4s;
   cursor: pointer;
+  margin: 20px;
 }
-
 button:hover {
   background-color: darkgreen;
   color: white;

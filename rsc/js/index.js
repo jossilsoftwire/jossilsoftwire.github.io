@@ -30,6 +30,21 @@ function addTextSection(regionToAddTo, name, content) {
     regionToAddTo.appendChild(newTextElement)
 }
 
+function sanitizeHTML(text) {
+    let element = document.createElement('div')
+    element.innerText = text
+    let sanitizedText = element.innerHTML
+    document.removeChild(element)
+    return sanitizedText
+}
+
+function clearLocalStorage() {
+    localStorage.clear()
+    location.reload()
+}
+
+window.history.replaceState({}, document.title, "index.html");
+
 let request = new XMLHttpRequest()
 request.open("GET", "rsc/shows.json", false)
 request.send(null)
@@ -39,3 +54,10 @@ for (let i = 0; i < SHOW_DATA["shows"].length; i++) {
     addShowToHTML(SHOW_DATA["shows"][i])
 }
 
+for (let i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i).startsWith("show")) {
+        const SHOW_STRING = localStorage.getItem(localStorage.key(i))
+        const SHOW_JSON = JSON.parse(SHOW_STRING)
+        addShowToHTML(SHOW_JSON)
+    }
+}
