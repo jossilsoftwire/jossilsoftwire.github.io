@@ -3,10 +3,13 @@ const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?"
 const SHOWS_LIST = document.querySelector(".shows")
 
 function spin() {
-    const elements = document.querySelectorAll("img, div, h2")
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].classList.toggle("spin")
+    const ELEMENTS = document.querySelectorAll("img, div, h2")
+    for (let i = 0; i < ELEMENTS.length; i++) {
+        ELEMENTS[i].classList.toggle("spin")
     }
+    const body = document.querySelector("body")
+    body.classList.toggle("flash")
+
 }
 
 function addGifToElement(query, elementToAppendTo) {
