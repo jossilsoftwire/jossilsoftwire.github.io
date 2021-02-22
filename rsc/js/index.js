@@ -2,6 +2,13 @@ const API_KEY = "tYOfY36jWYfu5BJeO6IPUR9pGFiTQXto"
 const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?"
 const SHOWS_LIST = document.querySelector(".shows")
 
+function spin() {
+    const elements = document.querySelectorAll("img, div, h2")
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].classList.toggle("spin")
+    }
+}
+
 function addGifToElement(query, elementToAppendTo) {
     const requestUrl = `${GIPHY_URL}api_key=${API_KEY}&q=${query}&limit=1&lang=en`
 
