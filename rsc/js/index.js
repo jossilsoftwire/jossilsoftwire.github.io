@@ -3,23 +3,18 @@ const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?"
 const SHOWS_LIST = document.querySelector(".shows")
 
 function addGifToElement(query, elementToAppendTo) {
-    const request = new XMLHttpRequest();
     const requestUrl = `${GIPHY_URL}api_key=${API_KEY}&q=${query}&limit=1&lang=en`
 
-    request.open('GET', requestUrl);
-    request.responseType = 'json';
-    request.send();
+    let gif = document.createElement("img")
+    gif.setAttribute("alt", `Gif for ${query}`)
+    gif.classList.add("gif")
+    elementToAppendTo.appendChild(gif)
 
-    request.onload = function() {
-        const response = request.response;
-        let gifUrl = response.data[0].images.original.url;
-
-        let gif = document.createElement("img")
-        gif.setAttribute("src", gifUrl)
-        gif.setAttribute("alt", `Gif for ${query}`)
-        gif.classList.add("gif")
-        elementToAppendTo.appendChild(gif)
-    }
+    fetch(requestUrl)
+        .then(response => response.json())
+        .then(data => {
+            gif.setAttribute("src", data.data[0].images.original.url)
+        })
 }
 
 function addShowToHTML(show) {
@@ -69,14 +64,13 @@ function clearLocalStorage() {
 
 window.history.replaceState({}, document.title, "index.html");
 
-let request = new XMLHttpRequest()
-request.open("GET", "rsc/shows.json", false)
-request.send(null)
-const SHOW_DATA = JSON.parse(request.responseText)
-
-for (let i = 0; i < SHOW_DATA["shows"].length; i++) {
-    addShowToHTML(SHOW_DATA["shows"][i])
-}
+fetch("rsc/shows.json")
+    .then(response => response.json())
+    .then(data => {
+        for (let i = 0; i < data["shows"].length; i++) {
+            addShowToHTML(data["shows"][i])
+        }
+    })
 
 if (localStorage.length === 0) {
     document.querySelector("#clearButton").classList.add("hidden")

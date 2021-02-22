@@ -11,6 +11,5 @@ function addAShow() {
         summary: SUMMARY,
         img: IMG_URL
     }
-    console.log(JSON.stringify(NEW_SHOW))
     localStorage.setItem(`show_${NAME}`, JSON.stringify(NEW_SHOW))
 }
