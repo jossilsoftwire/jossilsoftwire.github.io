@@ -1,6 +1,29 @@
+const API_KEY = "tYOfY36jWYfu5BJeO6IPUR9pGFiTQXto"
+const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?"
 const SHOWS_LIST = document.querySelector(".shows")
 
+function addGifToElement(query, elementToAppendTo) {
+    const request = new XMLHttpRequest();
+    const requestUrl = `${GIPHY_URL}api_key=${API_KEY}&q=${query}&limit=1&lang=en`
+
+    request.open('GET', requestUrl);
+    request.responseType = 'json';
+    request.send();
+
+    request.onload = function() {
+        const response = request.response;
+        let gifUrl = response.data[0].images.original.url;
+
+        let gif = document.createElement("img")
+        gif.setAttribute("src", gifUrl)
+        gif.setAttribute("alt", `Gif for ${query}`)
+        gif.classList.add("gif")
+        elementToAppendTo.appendChild(gif)
+    }
+}
+
 function addShowToHTML(show) {
+
     let tvShow = document.createElement("div")
     tvShow.classList.add("tvShow")
     SHOWS_LIST.appendChild(tvShow)
@@ -21,6 +44,7 @@ function addShowToHTML(show) {
     addTextSection(textRegion, "Rating", show.rating)
     addTextSection(textRegion, "Genre", show.genre)
     addTextSection(textRegion, "Summary", show.summary)
+    addGifToElement(show.name, textRegion)
 }
 
 function addTextSection(regionToAddTo, name, content) {
