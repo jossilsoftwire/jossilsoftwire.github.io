@@ -10,6 +10,7 @@ img {
   border-radius: 20px;
   margin-right: 20px;
   height: 400px;
+  object-fit: contain;
 }
 
 button {
@@ -28,14 +29,34 @@ button:hover {
 }
 
 .tvShow {
-  width: 600px;
+  width: 40%;
   border: white dashed 2px;
   border-radius: 20px;
   padding: 20px;
   display: flex;
-  margin: 20px;
+  margin: 20px 3%;
 }
 
+@media (max-width: 1220px) {
+  .tvShow {
+    width: 80%;
+    margin: 20px 6%;
+  }
+
+  img {
+    height: 300px;
+  }
+}
+@media (max-width: 600px) {
+  body {
+    font-size: large;
+  }
+
+  img {
+    height: unset;
+    width: 40%;
+  }
+}
 .shows {
   display: flex;
   flex-flow: row wrap;
